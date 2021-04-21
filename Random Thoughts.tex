@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{  {./images/} }
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{physics}
+\usepackage{derivative}
+\usepackage{bm}
+
+\addtolength{\topmargin}{-.25in}	
+\addtolength{\textheight}{.5in}
+\addtolength{\oddsidemargin}{-.75in}
+\addtolength{\textwidth}{1.5in}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\DeclareMathOperator{\di}{d\!}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+\newcommand{\vr}[1]{\textbf{#1}}
+
+\newcommand{\thus}[0]{\; \; \longrightarrow \; \;}
+
+\newcommand{\lag}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+\title{Random Thoughts}
+\author{Ryan Liu}
+\date{Last updated: \today}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{itemize}
+    \item 04/06: We probably need to consider computing power if we are going to iterate over all possible waveforms at different masses when calculating the SNR. On that note, would it be better to calculate just one waveform (or several), and determine SNR from that?
+    \item 04/06: For calculations we will probably have to rely on numerical approximations -- I don't think there's any neat calculation that can be done. 
+    \item 04/06: To test whether calculations are correct, we can simulate data by generating many CBC waves and hiding them in aLIGO noise data, and seeing what gets detected. 
+\end{itemize}
+
+\end{document}

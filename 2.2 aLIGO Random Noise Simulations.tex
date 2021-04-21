@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{  {./images/} }
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{physics}
+\usepackage{derivative}
+\usepackage{bm}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue]{hyperref}
+
+\addtolength{\oddsidemargin}{-.25in}
+\addtolength{\textwidth}{0.5in}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\DeclareMathOperator{\di}{d\!}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+\newcommand{\vr}[1]{\textbf{#1}}
+
+\newcommand{\thus}[0]{\; \; \longrightarrow \; \;}
+
+\newcommand{\lag}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+\title{Advanced LIGO Random Noise Generation}
+\author{Ryan Liu}
+\date{Last updated: \today}
+
+\begin{document}
+
+\maketitle
+
+\section{Resources Used}
+
+\begin{enumerate}
+    \item \textit{Introduction to Bayesian Parameter Estimation for Compact Binary Coalescences} by Sylvia Biscoveanu (GW Open Data Workshop #3 presentation)
+    \item B P Abbott \textit{et al} 2020 \textit{Class. Quantum Grav.} \textbf{37} 055002
+\end{enumerate}
+
+
+\section{Notes}
+
+The idea behind parameter estimation is \textbf{Bayes' Theorem}:
+\begin{equation}
+    P (A | B) = \frac{P (B | A) \cdot P (A)}{P(B)}
+\end{equation}
+which we are familiar with from elementary statistics. The GW detection version of this equation is 
+\begin{equation}
+    p(\theta | d,H) = \frac{p(d,\theta, H) p(\theta | H)}{p(d|H)} = \frac{\lag(d | \theta, H) \pi(\theta | H)}{\mathcal{Z}_H}
+\end{equation}
+where $\theta$ denotes the parameters of interest, $d$ is the data collected by LIGO, and $H$ is the particular gravitational wave model. Breaking down into components: 
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item $p(\theta |d,H)$: posterior 
+    \item $p(d|\theta, H)$: likelihood (of getting data $d$ given parameters $\theta$ and model $H$)
+    \item $p(\theta | H)$: prior (initial guess/probability of parameters $\theta$ under model $H$)
+    \item $p(d | H)$: evidence (normalization factor)
+\end{itemize}
+The Fourier transform of the data (frequency domain) is given by 
+\begin{equation}
+    \tilde{d}(f) = \tilde{n}(f) + \tilde{h}(\theta; f)
+\end{equation}
+where $\tilde{n}(f)$ is the noise (which we hope to generate here). We assume that \textit{the noise is stationary and Gaussian}, although this is not particularly true due to the presence of glitches. This means that the strain/data follows a unit Gaussian distribution about $\sqrt{\text{PSD}}$ when there is no signal; i.e. the histogram of the value of strain divided by $\sqrt{\text{PSD}}$ will produce a normal curve. \\
+
+\section{Modeling Random aLIGO Noise}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

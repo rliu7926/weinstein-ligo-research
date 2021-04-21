@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{  {./images/} }
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{physics}
+\usepackage{derivative}
+\usepackage{bm}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue]{hyperref}
+
+\addtolength{\oddsidemargin}{-.25in}
+\addtolength{\textwidth}{0.5in}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\DeclareMathOperator{\di}{d\!}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+\newcommand{\vr}[1]{\textbf{#1}}
+
+\newcommand{\thus}[0]{\; \; \longrightarrow \; \;}
+
+\newcommand{\lag}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+\title{Redshift Calculations}
+\author{Ryan Liu}
+\date{Last updated: April 6, 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Resources Used}
+
+\begin{enumerate}
+    \item Hartle \textit{General Relativity} Chapter 17 and 18 (Eq. 1-5)
+    \item Denis Michel. Calculation of distances and distance-redshift relationships under the different modes of space expansion. 2015. hal-01221674v2 (Eq. 6-7)
+\end{enumerate}
+
+\section{Notes}
+
+Suppose we are working with the \textbf{Flat Robertson-Walter Metric} defined by 
+\begin{equation}
+    ds^2 = -dt^2 + a^2(t)(dx^2+dy^2+dz^2)
+\end{equation}
+Where $a(t)$ is the scale factor. More generally, this can turn into the \textbf{General FRW Metric} by writing 
+\begin{equation}
+    ds^2 = -dt^2 + a^2(t) \Big[ \frac{dr^2}{1-kr^2} + r^2(d\theta^2 + \sin^2 \theta d\phi^2)\Big]
+\end{equation}
+where $k=-1$ is associated with an open universe. These metrics define \textit{homogeneous} and \textit{isotropic} space, meaning that it is spherically symmetric around any point of observation (isotropic) and the same at one point in space as at any other (homogeneous). \\
+
+When the universe expands, a \textbf{cosmological redshift} is induced that changes the energy and the perceived frequency of the wave. This is governed by the equation
+\begin{equation}
+    1+z = \frac{\omega_e}{\omega_0} = \frac{a(t_0)}{a(t_e)}
+\end{equation}
+where $e$ and $0$ denote \textit{emission} and \textit{observation} respectively. To determine a numerical value for $z$, we can assume that $\ddot{a}(t_0) = 0$; i.e. $\frac{da}{dt}$ is constant. Using \textbf{Hubble's Law}, 
+\begin{equation}
+    H_0 \equiv \frac{\dot{a}(t_0)}{a(t_0)}, \quad z = \Big[\frac{\dot{a}(t_0)}{a(t_0)}\Big] = H_0d
+\end{equation}
+\textit{This is only accurate for small distances $d$, because the value of $H_0$ changes with time.} At present, observational evidence suggests 
+\begin{equation}
+    H_0 = 72 \pm 7 \text{ km s}^{-1} \text{Mpc}^{-1}
+\end{equation}
+The redshift $z$ is given by the equation 
+\begin{equation}
+    z = e^{H_0D_L/c} - 1
+\end{equation}
+where $D_L$ is the apparent (measured) distance between the source and the receiver. The apparent distance is related to the actual distance at emission by 
+\begin{equation}
+    d_0 = \frac{c}{H_0}(1 - e^{-H_0D_L/c})
+\end{equation}
+
+
+\section{Redshift Calculations}
+
+From equations (6) and (7), we can write $z$ as a function of $d_0$:
+\begin{gather}
+    e^{-H_0D_L/c} = (z+1)^{-1} \\
+    d_0 = \frac{c}{H_0}(1-\frac{1}{z+1}) \\
+    z = \frac{H_0d_0}{c}(1 - \frac{H_0d_0}{c})^{-1} = -\frac{H_0d_0}{H_0d_0-c}
+\end{gather}
+This equation for $z$ is likely only accurate for relatively small values of $d_0$ ($\leq1$ Gpc). At $d_0 \approx 4.2$ Gpc, the redshift blows up to infinity. 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{| c | c |}
+    \hline
+        \textbf{$d_0$ (Observation distance)} & \textbf{$z$ (Cosmological redshift)} \\
+        \hline
+        1 Mpc& 0.0002402 \\
+        10 Mpc & 0.002407 \\
+        100 Mpc & 0.02461 \\
+        500 Mpc & 0.1365 \\
+        1 Gpc & 0.3161 \\
+        2 Gpc & 0.9243 \\
+        \hline
+    \end{tabular}
+    \caption{Redshift values at select observation distances}
+    \label{redshift_values}
+\end{table}
+
+
+\section{Generating Waveforms}
+
+We now use PyCBC to generate sample waveforms for a black hole binary of equal masses $m = 30 M_\odot$ at different redshifts. The link to the Google Colab can be found \href{https://colab.research.google.com/drive/1MA-n-TfQ8uf4-4IxASPQlvB89WSaL1DS?usp=sharing}{HERE}.
+\end{document}
