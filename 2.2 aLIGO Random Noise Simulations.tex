@@ -81,9 +81,38 @@ where $\tilde{n}(f)$ is the noise (which we hope to generate here). We assume th
 
 \section{Modeling Random aLIGO Noise}
 
-
-
-
+An outline of the process in developing the function follows: 
+\begin{enumerate}
+    \item Using the redshifted waveform creator function from Section 2.1, create the waveform that will be detected. 
+    \item Generate the frequency series by using the "pycbc.psd.from\_string" function:
+    \begin{enumerate}
+        \setlength{\itemsep}{0pt}
+        \item psd\_name: the name of the preloaded sensitivity / PSD curve
+        \item length: number of "points" needed to construct the PSD, equal to 
+        \begin{equation}
+            \frac{\text{number of simulations}}{\text{resolution}} + 1
+        \end{equation}
+        where the resolution is usually $1/16$ and the number of simulations $4096$
+        \item delta\_f: the resolution, i.e. difference in frequency between each "point"
+        \item low\_freq\_cutoff: the lowest frequency that noise will be generated from
+    \end{enumerate}
+    \item Turn the frequency-series PSD into a time-series of Gaussian noise using the pycbc.noise.noise\_from\_psd function:
+    \begin{enumerate}
+        \setlength{\itemsep}{0pt}
+        \item length: number of "points" of data, equal to 
+        \begin{equation}
+            \text{seconds of noise} \times \text{resolution}
+        \end{equation}
+        \item delta\_t: resolution, i.e. time interval between each data point
+        \item psd: the PSD generated in the previous step
+        \item seed: a random number
+    \end{enumerate}
+    \item Resize the GW signal created in step 1 to the length of the random noise sample created in step 3
+    \item Add the GW signal to the random noise sample
+    \item Create and resize the waveform template that will be used to detct the signal in the same manner as steps 1 and 3, making sure that no redshifting occurs
+    \item Calculate the SNR time series by using the matched\_filter function
+    \item Report the maximum SNR, and check that it occurs at the same time stamp as where the waveform was inserted
+\end{enumerate}
 
 
 
