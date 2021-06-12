@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{  {./images/} }
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{verbatim}
+\usepackage{physics}
+\usepackage{derivative}
+\usepackage{bm}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue]{hyperref}
+
+\addtolength{\oddsidemargin}{-.25in}
+\addtolength{\textwidth}{0.5in}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\DeclareMathOperator{\di}{d\!}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+\newcommand{\vr}[1]{\textbf{#1}}
+
+\newcommand{\thus}[0]{\; \; \longrightarrow \; \;}
+
+\newcommand{\lag}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+\title{Distance Estimation Function}
+\author{Ryan Liu}
+\date{Last updated: May 23, 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Resources Used}
+
+\begin{enumerate}
+    \item Andrew Ng's Coursera course on machine learning (provided motivation for method of parameter estimation)
+\end{enumerate}
+
+\section{Parameter Estimation}
+
+In machine learning, linear/logistic regression is generally carried out through the process of \textbf{gradient descent}. Given a particular model representation, e.g. $y = a_0 + a_1x$, a random guess is made for the parameters $a_0$ and $a_1$. Then, a \textbf{loss function} is calculated that describes how much the data deviates from the predicted model. \\
+
+Clearly, the goal is to minimize the loss function, at which point the optimal regression model is found. To accomplish this, the parameters are updated by multiplying the partial derivative of the loss function with respect to each parameter by the \textbf{learning rate}, often specified as $\alpha$. The learning rate must be chosen such that the parameter is optimized in a reasonable number of iterations; however, it cannot be so large that a bad guess will cause the parameter updates to overshoot and diverge. 
+
+\section{Distance Estimation Function}
+
+To determine the maximum distance that a gravitational wave signal can be detected with a SNR greater than or equal to a particular value, we construct a function operating on a simplified version of gradient descent: 
+\begin{enumerate}
+    \item Using the expectation\_SNR function, calculate the expectation value of the SNR of the desired signal at an arbitrary distance. 
+    \item Calculate the difference between the desired SNR and the value calculated in the previous step. 
+    \item Multiply the difference by some learning rate $\alpha$. Add this number to the initial distance prediction. 
+    \item With the updated distance prediction, calculate the expectation value of the SNR again. This value should be closer to the desired value. 
+    \item Repeat steps 3 and 4 for a specified number of iterations. The final distance prediction, which should result in an expectation value of SNR extremely similar to the specified SNR, will be the reported maximum distance at which the signal can be detected at the specified SNR. 
+\end{enumerate}
+The two hyperparameters introduced in this function are the learning rate $\alpha$ and the number of iterations; all other parameters are passed on from the expectation\_SNR function. \\
+
+For example, suppose we are attempting to determine the maximum distance at which the GW signal produced by a merger of two black holes of mass 30 $M_\odot$ each can be detected with an SNR of 8. Note that the following values are completely arbitrary -- 
+\begin{enumerate}
+    \item Our initial guess for the distance is $500$ Mpc. However, we find that the SNR at this distance is actually 50. 
+    \item The difference between the actual and desired SNR is $50 - 8 = 42$. Multiplying by the learning rate $\alpha = 10$, we will increase our prediction for the distance by $10 \times 42 = 420$ Mpc. Therefore, the new distance is $500 + 420 = 920$ Mpc. 
+    \item Calculating the SNR at a distance of $920$ Mpc, we find that the SNR is 20. 
+    \item The discrepancy in SNR is now 12, so we increase the distance prediction by $120$ Mpc. Now, the distance prediction is $1020$ Mpc. 
+    \item We repeat this for 50 iterations. At the last iteration, the distance is $1999.9$ Mpc, with a SNR of $8.01$. Therefore, the final prediction is $2000$ Mpc, which is reported as the maximum distance at which the GW signal can be detected with a SNR of $8$. 
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}

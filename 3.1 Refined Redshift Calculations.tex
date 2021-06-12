@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{  {./images/} }
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{verbatim}
+\usepackage{physics}
+\usepackage{derivative}
+\usepackage{bm}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue]{hyperref}
+
+\addtolength{\oddsidemargin}{-.25in}
+\addtolength{\textwidth}{0.5in}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\DeclareMathOperator{\di}{d\!}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+\newcommand{\vr}[1]{\textbf{#1}}
+
+\newcommand{\thus}[0]{\; \; \longrightarrow \; \;}
+
+\newcommand{\lag}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+\title{Redshift Calculations: Refined}
+\author{Ryan Liu}
+\date{Last updated: May 9, 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Resources Used}
+
+\begin{enumerate}
+    \item Hartle \textit{General Relativity} Chapter 18 (Eq. 1 - 10)
+    \item Peebels \textit{Principles of Physical Cosmology} Chapter 13 (Eq. 11 - 17)
+    \item Planck 2018 results -- arXiv:1807.06209 [astro-ph.CO] (cosmological constants)
+\end{enumerate}
+
+\section{Notes}
+
+As in Section 2.1, we continue to use the flat FRW model. Combining the Einstein equation and the first law of thermodynamics for cosmology (Hartle 18.20), we find that the evolution of the scale factor $a(t)$ is given by 
+\begin{equation}
+    \dot{a}^2 - \frac{8 \pi \rho}{3} a^2 = -k
+\end{equation}
+where $k$ is determined by the geometry of the universe: 
+\begin{equation}
+    \begin{cases}
+    k = 1 \thus \text{closed universe} \\
+    k = 0 \thus \text{flat universe} \\
+    k = -1 \thus \text{open universe}
+    \end{cases}
+\end{equation}
+This is called \textbf{Friedman's equation}. Supposing that $k=0$, Eq. 1 thus becomes
+\begin{equation}
+    \dot{a}^2 - \frac{8\pi \rho}{3} a^2 = 0
+\end{equation}
+Using the subscript "0" to denote the present time, we can solve the Friedman equation at $t_0$ to get
+\begin{equation}
+    H_0^2 - \frac{8 \pi \rho_0}{3} = 0
+\end{equation}
+as the Hubble constant is defined by $H_0 = \frac{\dot{a}(t_0)}{a(t_0}$. We can therefore define the present-day density of the universe as 
+\begin{equation}
+    \rho_0 = \rho_\text{crit} = \frac{3H_0^2}{8 \pi} 
+\end{equation}
+The density can be divided into matter, vacuum, and radiation components: 
+\begin{equation}
+    \rho_m(t) + \rho_v(t) + \rho_r(t) = \rho(t)
+\end{equation}
+The relative fractions can therefore be defined as 
+\begin{equation}
+    \Omega_m \equiv \frac{\rho_m(t_0)}{\rho_\text{crit}}, \quad \Omega_v \equiv \frac{\rho_v(t_0)}{\rho_\text{crit}}, \quad \Omega_r \equiv \frac{\rho_r(t_0)}{\rho_\text{crit}}
+\end{equation}
+Clearly, this means that 
+\begin{equation}
+    \Omega_m + \Omega_v + \Omega_r = 1
+\end{equation}
+The different components of density decay at different rates. In particular, 
+\begin{equation}
+    \rho_m(t) = \rho_m(t_0) \Big[ \frac{a(t_0)}{a(t)} \Big]^3, \quad \rho_r(t) = \rho_r(t_0) \Big[ \frac{a(t_0)}{a(t)} \Big]^4, \quad \rho_v(t) = \rho_v(t_0)
+\end{equation}
+The vacuum energy is assumed to be constant in space and time and positive, as there is no theory to fix its value. As a consequence of these decay rates, we find that the universe was radiation-dominated early in is formation, then matter-dominated, and now vacuum-dominated. From Eq. (7) and (8), we can write 
+\begin{equation}
+    \rho(a) = \rho_\text{crit} \Big( \Omega_v + \frac{\Omega_m}{a^3} + \frac{\Omega_r}{a^4} \Big), \quad a(t_0) = 1
+\end{equation}
+The cosmological equations are 
+\begin{gather}
+    \frac{\ddot{a}}{a} = -\frac{4}{3} \pi G(\rho_b + 3p_b) + \frac{\Lambda}{3} \\
+    \Big(\frac{\dot{a}}{a} \Big)^2 = \Big( \frac{\dot{z}}{1+z} \Big)^2 = \frac{8}{3} \pi G \rho_b + \frac{1}{a^2 R^2} + \frac{\Lambda}{3}
+\end{gather}
+where $\rho_b \sim 10^{-31} \text{ g cm}^{-3}$ is the mean cosmological mass density, $p_b <\ll \rho_b$ is the pressure, $\Lambda$ is the cosmological constant associated with dark energy, and $R$ is a constant denoting the distance from the origin (Earth). We see that Eq. (11) is similar to Eq. (3), but with added terms. Assuming that the mean mass density is dominated by nonrelativistic matter, 
+\begin{gather}
+    \frac{\ddot{a}}{a} = H_0^2 \Big[ \Omega_v - \frac{\Omega_m (1+z)^3}{2} \Big] \\
+    \frac{\dot{a}}{a} = H_0 \Big[ \Omega_m (1+z)^3 + \Omega_r (1+z)^2 + \Omega_v \Big] = H_0 E(z)
+\end{gather}
+From Eq. (13), we find that the distance of an object from Earth as a function of the redshift is thus 
+\begin{equation}
+    D_C = D_H \int_0^z \frac{dz}{E(z)}
+\end{equation}
+where $D_H$ is the \textbf{Hubble distance}: 
+\begin{equation}
+    D_H = \frac{c}{H_0}
+\end{equation}
+
+\section{Calculations}
+
+To solve the integral and find numerical solutions, the values of $H_0$, $\Omega_v$, $\Omega_r$, and $\Omega_m$ must be known. We know that 
+\begin{equation}
+    \Omega_m = \frac{8 \pi G \rho_0}{3 H_0^2}, \quad \Omega_r = \frac{1}{(H_0a_0R)^2}, \quad \Omega_v = \frac{\Lambda}{3H_0^2}
+\end{equation}
+From \textbf{Planck 2018}, the values of these cosmological constants are approximately 
+\begin{equation}
+    H_0 = 67.4 \pm 0.5 \text{ km/s/Mpc}, \quad \Omega_m \approx 0.315 \pm 0.007, \quad \Omega_v = 0.6847 \pm 0.0073
+\end{equation}
+choosing the lower value of $H_0$ rather than the higher ($\approx 74$). The decay of $\Omega_r$ and Eq. (8) indciate that $\Omega_r$ is of negligible value. Therefore, Eq. (15) becomes 
+\begin{equation}
+    D_C = \frac{c}{H_0} \int_0^z \frac{dz}{\sqrt{\Omega_m(1+z)^3 + \Omega_v}}
+\end{equation}
+Numerically solving, we get the following values:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{| c | c |}
+    \hline
+        \textbf{$d_0$ (Observation distance)} & \textbf{$z$ (Cosmological redshift)} \\
+        \hline
+        46.0 Mpc & 0.01 \\
+        228 Mpc & 0.05 \\
+        449 Mpc & 0.10 \\
+        2.01 Gpc & 0.50 \\
+        3.48 Gpc & 1.00 \\
+        9.73 Gpc & 10.00 \\
+        12.9 Gpc & 100.00 \\
+        \hline
+    \end{tabular}
+    \caption{Redshift values at select observation distances}
+    \label{redshift_values}
+\end{table}
+As redshifts tend to infinity, we approach the beginning of the universe, which is approximately 13.8 Gy; i.e. $d_0$ approaches 13.8 Gpc. 
+
+\section{Implementation}
+
+To add the effect of this nonlinear redshift to to the \verb1create_waveform1 function, the AstroPy package was used. The default parameters that will be used are those specified in Planck 2018 -- in particular, 
+\begin{equation}
+    H_0 = 67.7, \quad \Omega_m = 0.310
+\end{equation}
+and a flat universe is assumed. 
+
+\end{document}
