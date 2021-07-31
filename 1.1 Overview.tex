@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{multicol}
+\setlength\columnsep{25pt} 
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -46,10 +47,10 @@
 
 \begin{document}
 
-
 \maketitle
 
 \begin{multicols*}{2}
+
 
 \section{Research Proposal}
 
@@ -75,7 +76,7 @@
     \item Factor in any additional effects. 
 \end{enumerate}
 
-\section{Summary of Progress: April}
+\section{Summary: April}
 
 \subsection{Cosmological Redshift}
 
@@ -89,7 +90,7 @@ To simulate the detection of a black hole merger by LIGO, a function was created
 
 To answer the research question, the functions from the previous two sections were used to look at the impact of distance of observation, imprecision of the template waveform, LIGO sensitivity, black hole mass, and random noise on the SNR of detection. 
 
-\section{Summary of Progress: May}
+\section{Summary: May}
 
 \subsection{Recalculated Redshift}
 
@@ -119,17 +120,69 @@ The maximum distance a black hole merger can be detected as a function of mass, 
 
 The effect of spin on GW signals and their relative SNR were investigated. 
 
+\section{Summary: June-July}
+
+\subsection{SNR Expectation Value Function}
+
+The entire expectation value function was moved into the frequency domain, including generation of the waveform. Additionally, the function was amended to scale with luminosity distance rather than comoving distance. All sources of noise due to conversion error were erased, and the function runs around 40 times faster. 
+
+\subsection{Distance Estimation Simulations}
+
+With the speed improvement over (3.5), the distance estimation function was run for all three design sensitivities at an SNR of 6, 8, and 10. For an SNR of 8, the maximum distance of observation as a function of total mass and mass ratio was calculated. 
+
+\subsection{Merger Rate Calculations}
+
+The BBH merger rate and total mergers as a function of redshift were calculated for non-evolving and modified power law distributions. 
+
+\subsection{Spin Distribution Calculations}
+
+Using IMRPhenomPv2, the effects of spin in all three dimensions ($x$, $y$, and $z$) were investigated. Distance estimation simulations were run for varying component spins, effective spins, and precession spins, and various Gaussian spin distributions were calculated. 
+
+\subsection{Mass Distribution Calculations}
+
+The mass distribution of binary BBH mergers (primary mass and mass ratio) were determined using several modified power law distributions between $\approx 3$ to $90 M_\odot$. 
+
+\subsection{Sky Location Calculations}
+
+The effects of sky location (celestial coordinates), inclination, and detector orientation on the expectation SNR of BBHs were investigated. Additionally, the antenna pattern volume as a function of redshift was calculated.
+
+\subsection{Detection Rate Calculations}
 
 
 
+\section{Final Paper Outline}
+
+\textbf{Title:} Determining Binary Black Hole Detection Rates for Second- and Third-Generation Gravitational-Wave Observatories
+
+\begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item Introduction
+    \begin{enumerate}
+        \item Brief overview of LIGO detections and GW pouplations 
+        \item Overview of contents of paper, outlining goals, parameters, and results
+    \end{enumerate}
+    \item Estimation of merger rate density
+    \begin{enumerate}
+        \item Mass-redshift-spin model
+        \item Subsections for mass, redshift, spin, and location distributions
+    \end{enumerate}
+    \item Calculation of LIGO detection ranges
+    \begin{enumerate}
+        \item SNR calculations
+        \item Parameter estimation model
+        \item Results on number of mergers detected
+        \item Population distribution of mergers
+    \end{enumerate}
+    \item Conclusions
+\end{enumerate}
 
 \section{Questions}
 
 \begin{itemize}
-    \item Why is there a deviation between the expectation SNR and the median of multiple runs of the simulated SNR (with noise)? 
-    \item Is there any better way to determine the maximum redshift/distance?
-    \item Why can't the spin parameter for the $x$ and $y$ axes be set to anything but 0? Is it necessary/important to investigate those spins? 
-    \item What next steps should I take? 
+    \item Is there a preferred model for the mass distribution / spin distribution / merger rate that should be used or considered? 
+    \item How valid are extrapolations of the above models to the high redshifts that can be detected by Cosmic Explorer?
+    \item How can we iterate through all of the $(m_1, q, \chi_\text{eff}, \chi_\text{p})$ bins efficiently? Should I (and how) determine an analytic function for the SNR? 
+    \item What will eventual publication of the paper entail? Rough schedule? 
 \end{itemize}
 
 
